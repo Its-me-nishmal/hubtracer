@@ -132,3 +132,21 @@
   font-size: 16px; /* Adjust the text font size */
   margin-left: 10px; /* Adds spacing between the profile picture and text */
 }
+
+@media screen and (max-width: 768px) {
+  .user-column {
+    flex-direction: column; /* Change to column layout on smaller screens */
+  }
+
+  .followers-column,
+  .following-column,
+  .user-details {
+    width: 100%; /* Make user details and columns full width on smaller screens */
+    margin-bottom: 20px; /* Add margin between sections */
+  }
+
+  .followers-column,
+  .following-column {
+    max-height: none; /* Remove max height for follower and following lists */
+  }
+}
