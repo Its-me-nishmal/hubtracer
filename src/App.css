@@ -1,0 +1,113 @@
+/* App.css */
+
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #4b6cb7, #182848); /* Official gradient design */
+  color: #fff; /* Text color for better contrast */
+}
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+  grid-column: 1 / span 3; /* Stretch the search form across all columns */
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.search-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-column,
+.followers-column,
+.following-column {
+  display: flex;
+  /* gap: 20px; */
+}
+
+.user-details,
+.followers-list,
+.following-list {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-pic,
+.github-search-container .user-details img,
+.github-search-container .followers-column img,
+.github-search-container .following-column img {
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-stats {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.user-stats span {
+  margin-right: 20px;
+}
+
+.followers-list h3,
+.following-list h3 {
+  margin-top: 0;
+}
+
+.followers-list ul,
+.following-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.followers-list ul li,
+.following-list ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.followers-list ul li::before,
+.following-list ul li::before {
+  content: none; /* Removes the dots */
+}
+
+.followers-list ul li img,
+.following-list ul li img {
+  width: 30px; /* Adjust the size of the profile pictures */
+  height: 30px; /* Adjust the size of the profile pictures */
+  border-radius: 50%; /* Makes the profile pictures circular */
+}
+
+.followers-list ul li span,
+.following-list ul li span {
+  font-size: 16px; /* Adjust the text font size */
+  margin-left: 10px; /* Adds spacing between the profile picture and text */
+}
