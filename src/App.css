@@ -1,7 +1,6 @@
 /* App.css */
-
 .App {
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,8 +9,18 @@
   font-family: Arial, sans-serif;
   background: linear-gradient(45deg, #4b6cb7, #182848); /* Official gradient design */
   color: #fff; /* Text color for better contrast */
+  /* Set the maximum height for the flex container */
 }
 
+/* Add this style for better scrolling experience */
+.App::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.App::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5); /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Border radius of the scrollbar thumb */
+}
 
 .search-form {
   display: flex;
@@ -39,6 +48,16 @@
   cursor: pointer;
 }
 
+.b {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .user-column,
 .followers-column,
 .following-column {
@@ -46,12 +65,14 @@
   /* gap: 20px; */
 }
 
-.user-details,
-.followers-list,
-.following-list {
+.followers-column,
+.following-column,
+.user-details {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 300px; /* Set the maximum height for the lists */
 }
 
 .profile-pic,
@@ -75,39 +96,39 @@
   margin-right: 20px;
 }
 
-.followers-list h3,
-.following-list h3 {
+.followers-column h3,
+.following-column h3 {
   margin-top: 0;
 }
 
-.followers-list ul,
-.following-list ul {
+.followers-column ul,
+.following-column ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.followers-list ul li,
-.following-list ul li {
+.followers-column ul li,
+.following-column ul li {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.followers-list ul li::before,
-.following-list ul li::before {
+.followers-column ul li::before,
+.following-column ul li::before {
   content: none; /* Removes the dots */
 }
 
-.followers-list ul li img,
-.following-list ul li img {
+.followers-column ul li img,
+.following-column ul li img {
   width: 30px; /* Adjust the size of the profile pictures */
   height: 30px; /* Adjust the size of the profile pictures */
   border-radius: 50%; /* Makes the profile pictures circular */
 }
 
-.followers-list ul li span,
-.following-list ul li span {
+.followers-column ul li span,
+.following-column ul li span {
   font-size: 16px; /* Adjust the text font size */
   margin-left: 10px; /* Adds spacing between the profile picture and text */
 }

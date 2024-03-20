@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaUser, FaUsers, FaFolderOpen, FaSearch } from 'react-icons/fa'; // Import FaSearch icon
-import QRCode from 'qrcode.react'; // Import QRCode component
+import { FaUser, FaUsers, FaFolderOpen, FaSearch } from 'react-icons/fa';
+import QRCode from 'qrcode.react';
 import './GitHubSearch.css';
 import './App.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GitHubSearch = () => {
     const [username, setUsername] = useState('');
@@ -11,7 +13,7 @@ const GitHubSearch = () => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [searched, setSearched] = useState(false); // State to track if search has been performed
+    const [searched, setSearched] = useState(false);
 
     useEffect(() => {
         if (githubData) {
@@ -25,8 +27,9 @@ const GitHubSearch = () => {
         try {
             const response = await axios.get(`https://api.github.com/users/${username}`);
             setGithubData(response.data);
-            setSearched(true); // Set searched to true after search
+            setSearched(true);
         } catch (error) {
+            toast.error('User not found! Please enter a valid GitHub username.');
             console.error('Error fetching GitHub data:', error);
         }
         setLoading(false);
@@ -51,14 +54,14 @@ const GitHubSearch = () => {
     };
 
     const handleSearchAgain = () => {
-        setSearched(false); // Reset searched state to perform another search
-        setUsername(''); // Clear username input field
-        setGithubData(null); // Reset githubData to hide user details and lists
+        setSearched(false);
+        setUsername('');
+        setGithubData(null);
     };
 
     return (
         <div className="github-search-container">
-            {!searched && ( // Show input and submit button only if search has not been performed
+            {!searched && (
                 <div className="search-form">
                     <input
                         type="text"
@@ -72,13 +75,20 @@ const GitHubSearch = () => {
 
                 </div>
             )}
-            {githubData && ( // Show user details, followers, and following lists if search has been performed
+            {githubData && (
                 <div className="user-column">
                     <div className="user-details">
                         <h2>{githubData.login}</h2>
                         {githubData.bio && <p>{githubData.bio}</p>}
                         {githubData.avatar_url && (
-                            <img src={githubData.avatar_url} alt="GitHub Profile Pic" className="profile-pic" />
+                            <>
+                                  <img src={githubData.avatar_url} alt="GitHub Profile Pic" className="profile-pic" />
+                              <div className="qr-code-container">
+                            <QRCode value={`https://github.com/${username}`} bgColor="#182848" fgColor="#4b6cb7" />
+                        </div>
+                            </>
+                      
+                            
                         )}
                         <div className="user-stats">
                             <span>
@@ -91,12 +101,9 @@ const GitHubSearch = () => {
                                 <FaFolderOpen /> Public Repos: {githubData.public_repos}
                             </span>
                         </div>
-                        <div className="qr-code-container">
-                            <QRCode value={`https://github.com/${username}`} />
-                        </div>
+                      
                     </div>
                     <div className="followers-column">
-                        <h3>Followers List</h3>
                         <ul>
                             {followers.map((follower) => (
                                 <li key={follower.id}>
@@ -107,7 +114,6 @@ const GitHubSearch = () => {
                         </ul>
                     </div>
                     <div className="following-column">
-                        <h3>Following List</h3>
                         <ul>
                             {following.map((followed) => (
                                 <li key={followed.id}>
@@ -120,8 +126,8 @@ const GitHubSearch = () => {
 
                 </div>
             )}
-               {searched && ( // Show button to search again if search has been performed
-                        <button className="search-again-btn" onClick={handleSearchAgain}>
+               {searched && (
+                        <button className="b" onClick={handleSearchAgain}>
                             Search Again
                         </button>
                     )}
